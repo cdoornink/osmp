@@ -1,0 +1,33 @@
+<div class="signup-page">
+  <form class="form-horizontal offset2 span6">
+    <h2>Sign Up</h2>
+    <div class="control-group first-name-signup-group">
+      <label class="control-label">First Name</label>
+      <div class="controls">{{view Ember.TextField valueBinding="firstName" required="true"}}</div>
+    </div>
+    <div class="control-group last-name-signup-group">
+      <label class="control-label">Last Name</label>
+      <div class="controls">{{view Ember.TextField valueBinding="lastName" required="true"}}</div>
+    </div>
+
+    <div class="control-group email-signup-group">
+      <label class="control-label">Email Address</label>
+      <div class="controls">
+        {{view Ember.TextField valueBinding="email" type="email" required="true"}}
+        <span class="help-inline">Email is already taken</span>
+      </div>
+    </div>
+    <div class="control-group password-signup-group">
+      <label class="control-label">Password</label>
+      <div class="controls">{{view Ember.TextField valueBinding="password" type="password" required="true"}}</div>
+    </div>    
+    <div class="control-group">
+      <div class="controls">
+        <label class="checkbox">
+          {{view Ember.Checkbox checkedBinding="agreeToTerms"}} I agree to the {{#linkTo 'terms'}}terms of use{{/linkTo}}
+        </label>
+        <button type="submit" class="btn btn-primary"  {{bindAttr disabled="hasNotAgreed"}} {{action "trySignup"}}>Sign Up</button>
+      </div>
+    </div>
+  </form>
+</div>

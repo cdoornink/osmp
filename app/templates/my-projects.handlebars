@@ -1,0 +1,34 @@
+<div class="row-fluid browse-header">
+  <h2>My Projects</h2>
+</div>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#A" data-toggle="tab">Created by me</a></li>
+  <li><a href="#B" data-toggle="tab">Participating in</a></li>
+</ul>
+<div class="tabbable">
+  <div class="tab-content">
+    <div class="tab-pane active" id="A">
+      {{#if controller.created}}
+      {{#view App.ProjectListView}}
+        {{#each project in controller.created}}
+          {{view App.ProjectListItemView contentBinding='project'}}
+        {{/each}}
+      {{/view}}
+      {{else}}
+      You haven't created any projects yet. {{#linkTo create}}Create a Project{{/linkTo}}
+      {{/if}}
+    </div>
+    <div class="tab-pane" id="B">
+      {{#if controller.participating}}
+      {{#view App.ProjectListView}}
+        {{#each project in controller.participating}}
+          {{view App.ProjectListItemView contentBinding='project'}}
+        {{/each}}
+      {{/view}}
+      {{else}}
+      You aren't participating in any projects yet. {{#linkTo projects}}Browse Current Projects{{/linkTo}}
+      {{/if}}      
+    </div>
+  </div>
+</div>

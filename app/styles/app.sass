@@ -1,0 +1,138 @@
+$primary: #2c3e50
+$dark_blue: #2c3e50
+$small_text: #b4bcc2
+$light_blue: #dce4ec
+$green: #18bc9c
+$dark_green: #08ac8c
+$super_light_blue: #edf4f7
+$middle_blue: #cCd4dC
+
+/* BOOTSTRAP OVERRIDES */
+body
+  background: #edf4f7
+.main
+  margin-top: 50px
+@media (max-width: 976px)
+  .main
+    margin-top: 20px
+.navbar-inner
+  border-bottom: none
+.navbar .brand
+  font-family: 'Lily Script One', cursive
+  font-size: 34px
+@media (max-width: 767px)
+  .navbar .brand
+    font-size: 20px
+.nav-tabs>.active>a, .nav-tabs>.active>a:hover, .nav-tabs>.active>a:focus
+  background-color: #edf4f7
+  color: #456566
+
+[class*=" icon-"]
+  width: auto
+  height: auto
+ 
+@import 'icons' 
+  
+/* SIGNUP PAGE */
+.help-inline
+  display: none
+.warning .help-inline
+  display: inline
+.need2, .need3, .need4, .need5, .need6, .need7, .need8, .need9, .need10 
+  display: none
+  
+.browse-header, .project-header
+  margin: 0 0 20px
+/* project list item */
+.project-list-item-container
+  overflow: auto
+  padding-top: 15px
+  margin-bottom: 3px
+  background: $light_blue
+@media (max-width: 767px)
+  .project-list-item-container
+    padding: 10px
+.tabbable .project-list-item-container
+  padding: 10px
+.project-information
+  float: left
+  overflow: auto
+  padding-bottom: 10px
+.project-name
+  font-size: 24px
+.project-creator
+  font-size: 14px
+.project-date
+  font-size: 13px
+  color: #555
+.project-genre
+  font-size: 13px
+  color: #444
+.project-needs-summary
+  float: left
+  font-size: 45px
+  padding-bottom: 10px
+  .role-icon
+    margin-left: 10px
+    
+.project-header
+  h2
+    margin-bottom: 0
+  h6
+    color: $small_text
+    font-size: 13px
+    margin: 0
+  .description
+    background: none
+    color: $dark_blue
+    font-size: 16px
+    margin-bottom: 4px
+.need-options
+  background: $light_blue
+  padding: 10px
+  overflow: auto
+  color: $dark_blue
+  button
+    float: right
+  p
+    padding-bottom: 5px
+    border-bottom: 3px solid $middle_blue
+  .need-status
+    float: left
+    line-height: 35px
+.auditions
+  margin-bottom: 20px
+  background: $middle_blue
+.audition
+  padding: 10px
+.initial-tracks
+  background: $light_blue
+  padding: 10px
+  overflow: auto
+.progress
+  border-radius: 0px
+  background: $super_light_blue
+.tips
+  padding: 10px 20px
+  margin: 20px -10px 10px
+  background: $middle_blue
+.owner-upload-container
+  overflow: auto
+
+.rough-mix
+  h3
+    margin-bottom: 0
+.rough-mix-play-button, .rough-mix-pause-button
+  margin-right: 5px
+  cursor: pointer
+  line-height: 35px
+  &:hover
+    color: $green
+  &:active
+    color: $dark_green
+.rough-mix-pause-button
+  display: none
+  line-height: 37px
+.rough-mix-progress
+  height: 5px
+  margin-bottom: 0  
