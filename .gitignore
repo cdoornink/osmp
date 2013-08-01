@@ -5,3 +5,4 @@ dist
 .sass-cache/*
 design_files/*
 components
+bower_components
