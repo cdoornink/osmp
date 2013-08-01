@@ -1,0 +1,14 @@
+{
+  "name": "open-source-music-project",
+  "version": "0.0.0",
+  "dependencies": {
+    "jquery": "~2.0.2",
+    "jquery-ui": "1.9.2",
+    "handlebars": "http://builds.emberjs.com.s3.amazonaws.com/handlebars-1.0.0-rc.4.js",
+    "ember": "http://builds.emberjs.com.s3.amazonaws.com/ember-1.0.0-rc.5.min.js",
+    "ember-dev": "http://builds.emberjs.com.s3.amazonaws.com/ember-1.0.0-rc.5.js",
+    "moment": "https://raw.github.com/timrwood/moment/2.0.0/min/moment.min.js",
+    "jquery-file-upload": "git://github.com/blueimp/jQuery-File-Upload.git",
+    "md5": "http://www.myersdaily.org/joseph/javascript/md5.js"
+  }
+}

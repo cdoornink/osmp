@@ -1,0 +1,13 @@
+{
+  "name": "md5",
+  "_cacheHeaders": {
+    "ETag": "\"3dc48cd-1587-3ca38fc1efac0\"",
+    "Last-Modified": "Tue, 21 Oct 2003 21:17:07 GMT",
+    "Content-Length": "5511",
+    "Content-Type": "application/javascript"
+  },
+  "_release": "e-tag:3dc48cd-1",
+  "main": "index.js",
+  "_source": "http://www.myersdaily.org/joseph/javascript/md5.js",
+  "_target": "*"
+}

@@ -1,0 +1,13 @@
+{
+  "name": "ember",
+  "_cacheHeaders": {
+    "ETag": "\"a01cc75550b168d4faea1f9a137a99d3\"",
+    "Last-Modified": "Sat, 01 Jun 2013 18:18:12 GMT",
+    "Content-Length": "203662",
+    "Content-Type": "application/javascript"
+  },
+  "_release": "e-tag:a01cc7555",
+  "main": "index.js",
+  "_source": "http://builds.emberjs.com.s3.amazonaws.com/ember-1.0.0-rc.5.min.js",
+  "_target": "*"
+}

@@ -1,0 +1,13 @@
+{
+  "name": "handlebars",
+  "_cacheHeaders": {
+    "ETag": "\"996a2066f9d8ceba9a6a890c7fc9dd57\"",
+    "Last-Modified": "Tue, 25 Jun 2013 22:51:16 GMT",
+    "Content-Length": "71129",
+    "Content-Type": "application/javascript"
+  },
+  "_release": "e-tag:996a2066f",
+  "main": "index.js",
+  "_source": "http://builds.emberjs.com.s3.amazonaws.com/handlebars-1.0.0-rc.4.js",
+  "_target": "*"
+}
