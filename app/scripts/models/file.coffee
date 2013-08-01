@@ -11,6 +11,14 @@ App.File = Ember.Object.extend
     @set 'status', f.status
     @set 'date', f.date
     @set 'role', f.role
+    @set 'need', f.need
+  isAccepted: (->
+    return true if @status is "accepted"
+  ).property('status')
+  isMine: (->
+    console.log @user
+    return true if @user.name is App.me.name
+  ).property('user')
     
 App.File.reopenClass  
   toJSON: (f) ->
@@ -25,3 +33,4 @@ App.File.reopenClass
     status: f.status
     date: f.date
     role: f.role
+    need: f.need

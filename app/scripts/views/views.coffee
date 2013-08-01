@@ -16,6 +16,12 @@ App.OwnerUploadView = Ember.View.extend
     that = this
     $('#owner-fileupload').fileupload
       dataType: 'json'
+      add: (e, data) ->
+        uploadFile = data.files[0];
+        if (!(/\.(mp3)$/i).test(uploadFile.name))
+          alert "You can only upload mp3 files."
+        else
+          data.submit()
       progressall: (e, data) ->
         progress = (data.loaded / data.total) * 100
         $('#owner-progress .bar').css 'width', progress + '%'
@@ -24,6 +30,26 @@ App.OwnerUploadView = Ember.View.extend
         $.each data.result.files, (index, file) ->
           console.log file
           that.get('controller').addOwnerFile(file)
+
+App.AuditionerUploadView = Ember.View.extend
+  classNames: ["owner-upload-container"]
+  didInsertElement: ->
+    that = this
+    $('#auditioner-fileupload').fileupload
+      dataType: 'json'
+      add: (e, data) ->
+        uploadFile = data.files[0];
+        if (!(/\.(mp3)$/i).test(uploadFile.name))
+          alert "You can only upload mp3 files."
+        else
+          data.submit()
+      progressall: (e, data) ->
+        progress = (data.loaded / data.total) * 100
+        $('#auditioner-progress .bar').css 'width', progress + '%'
+      done: (e, data) ->
+        $('#auditioner-progress .bar').css 'width', '0%'
+        $.each data.result.files, (index, file) ->
+          that.get('controller').addAuditionerFile(file, that.get('content'))
   
 
 App.TrackView = Ember.View.extend
@@ -31,7 +57,15 @@ App.TrackView = Ember.View.extend
   templateName: "track"
   didInsertElement: ->
     $('.icon-box-add').tooltip()
- 
+    $(".icon-remove").tooltip()
+    
+App.AuditionListView = Ember.View.extend
+  classNames: ["audition"]
+  didInsertElement: ->
+    $('.toggle-mix-button').tooltip()
+    $('.solo-play-button').tooltip()
+    $(".icon-remove").tooltip()
+     
 #  NEED TO FIGURE OUT HOW THIS WILL ALL WORK WITH MULTIPLE PLAYERS ON A PAGE...
 App.ProgressView = Ember.View.extend
   progressChanged: (->

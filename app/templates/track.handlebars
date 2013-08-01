@@ -1,9 +1,15 @@
-{{#with file}}
-<tr>
-  <th>{{needsIcon this}}</th>
-  <th>{{name}}</th> 
-  <th>{{user.name}}</th> 
-  <th>{{fromNow date}}</th>
-  <th>{{downloadAudio this}}</th>
-</tr>
-{{/with}}
+<th>{{needsIcon file}}</th>
+<th>{{file.name}}</th> 
+<th>{{file.user.name}}</th> 
+<th>{{fromNow file.date}}</th> 
+<th>
+  {{#if isMine}}
+    {{#if file.isMine}}
+      <span class="icon-remove" title="delete track" {{action deleteAudio file}}></span>
+    {{else}}
+      {{downloadAudio file}}
+    {{/if}}
+  {{else}}
+    {{downloadAudio file}}
+  {{/if}}
+</th>

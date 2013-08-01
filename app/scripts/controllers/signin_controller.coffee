@@ -12,7 +12,12 @@ App.SigninController = Ember.ObjectController.extend
   
   tryLogin: (auto) ->
     that = this
-    App.api "auth", "POST", {email:@username,password:@password}, (response) ->
+    if @password and !auto
+      pass = md5(@password) 
+    else if @password
+      pass = @password
+    App.api "auth", "POST", {email:@username,password:pass}, (response) ->
+      that.set("password", null)
       if response.user
         user = App.User.create()
         user.setUserProperties response.user

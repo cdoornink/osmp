@@ -6,6 +6,8 @@ $green: #18bc9c
 $dark_green: #08ac8c
 $super_light_blue: #edf4f7
 $middle_blue: #cCd4dC
+$red: #e95d4e
+$light_red: #ed7669
 
 /* BOOTSTRAP OVERRIDES */
 body
@@ -32,6 +34,11 @@ body
   height: auto
  
 @import 'icons' 
+
+.accepted-text
+  color: $green
+.rejected-text
+  color: $red
   
 /* SIGNUP PAGE */
 .help-inline
@@ -74,6 +81,8 @@ body
   padding-bottom: 10px
   .role-icon
     margin-left: 10px
+.role-icon.closed
+  opacity: 0.5
     
 .project-header
   h2
@@ -136,3 +145,21 @@ body
 .rough-mix-progress
   height: 5px
   margin-bottom: 0  
+tr.temp-in-mix
+  background: $dark_blue
+  color: $light_blue
+
+.icon-remove
+  color: $red
+  cursor: pointer
+  &:hover
+    color: $light_red
+.audition .btn
+  margin-left: 10px
+.toggle-mix-button, .solo-play-button
+  margin-right: 10px
+  cursor: pointer
+.toggle-mix-button.selected
+  color: $green
+.solo-play-button.selected
+  display: none

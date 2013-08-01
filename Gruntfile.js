@@ -57,29 +57,31 @@ module.exports = function(grunt) {
     concat: {
       vendor: {
         src: [
-          'components/jquery/jquery.min.js',
+          'bower_components/jquery/jquery.min.js',
           'app/bootstrap/js/bootstrap.min.js',
           'app/bootstrap/js/bootstrap-fileupload.min.js',
-          'components/handlebars/index.js',
-          'components/ember-dev/index.js',
-          'components/moment/index.js',
-          'components/jquery-file-upload/js/vendor/jquery.ui.widget.js',
-          'components/jquery-file-upload/js/jquery.iframe-transport.js',
-          'components/jquery-file-upload/js/jquery.fileupload.js'
+          'bower_components/handlebars/index.js',
+          'bower_components/ember-dev/index.js',
+          'bower_components/moment/index.js',
+          'bower_components/md5/index.js',
+          'bower_components/jquery-file-upload/js/vendor/jquery.ui.widget.js',
+          'bower_components/jquery-file-upload/js/jquery.iframe-transport.js',
+          'bower_components/jquery-file-upload/js/jquery.fileupload.js'
         ],
         dest: 'build/js/vendor.js'
       },
       prodVendor: {
         src: [
-          'components/jquery/jquery.min.js',
+          'bower_components/jquery/jquery.min.js',
           'app/bootstrap/js/bootstrap.min.js',
           'app/bootstrap/js/bootstrap-fileupload.min.js',
-          'components/handlebars/index.js',
-          'components/ember/index.js',
-          'components/moment/index.js',
-          'components/jquery-file-upload/js/vendor/jquery.ui.widget.js',
-          'components/jquery-file-upload/js/jquery.iframe-transport.js',
-          'components/jquery-file-upload/js/jquery.fileupload.js'
+          'bower_components/handlebars/index.js',
+          'bower_components/ember/index.js',
+          'bower_components/moment/index.js',
+          'bower_components/md5/index.js',
+          'bower_components/jquery-file-upload/js/vendor/jquery.ui.widget.js',
+          'bower_components/jquery-file-upload/js/jquery.iframe-transport.js',
+          'bower_components/jquery-file-upload/js/jquery.fileupload.js'
         ],
         dest: 'build/js/vendor.js'
       },

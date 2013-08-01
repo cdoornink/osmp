@@ -16,21 +16,39 @@ Ember.Handlebars.registerBoundHelper "downloadAudio", (file) ->
   
 Ember.Handlebars.registerBoundHelper "auditionText", (a) ->
   if a.status == "open"
-    return new Handlebars.SafeString('<div class="audition">'+a.name+' signed up to audition '+moment(a.lastUpdated).fromNow()+'</div>')
+    if a.name is App.me.name
+      message = "You signed up to audition"
+    else
+      message = a.name+' signed up to audition'
   if a.status == "submitted"
-    return new Handlebars.SafeString('<div class="audition">'+a.name+' submitted their track '+moment(a.lastUpdated).fromNow()+'</div>')
+    if a.name is App.me.name
+      message = 'You submitted your track'
+    else
+      message = a.name+' submitted their track'
   if a.status == "accepted"
-    return new Handlebars.SafeString('<div class="audition">'+a.name+"'s track was accepted "+moment(a.lastUpdated).fromNow()+'</div>')
+    if a.name is App.me.name
+      message = "Your track was <span class='accepted-text'>accepted</span>"
+    else
+      message = a.name+"'s track was <span class='accepted-text'>accepted</span>"
   if a.status == "rejected"
-    return new Handlebars.SafeString('<div class="audition">'+a.name+"'s track was rejected "+moment(a.lastUpdated).fromNow()+'</div>')
+    if a.name is App.me.name
+      message = "Your track was <span class='rejected-text'>rejected</span>"
+    else
+      message = a.name+"'s track was <span class='rejected-text'>rejected</span>"
+  if message
+    return new Handlebars.SafeString(message+' '+moment(a.lastUpdated).fromNow())
 
-Ember.Handlebars.registerBoundHelper "showMyRole", (need) ->
-  if need.auditions
-    for a in need.auditions
-      if a.id == App.me.id
-        # this wont work. You need to create a boolean helper and do if statements in the template
-        return new Handlebars.SafeString('You are currently auditioning for this part. <button class="btn" {{action submitTrack need}}>Submit Track</button>')
-  return new Handlebars.SafeString('This part is '+need.status+' <button class="btn" {{action audition need}}>Audition</button>')
-
+Ember.Handlebars.registerBoundHelper "playAuditionSolo", (a, files) ->
+  if a.file
+    url = null
+    files.forEach (f) -> if a.file is f.id then url = f.url
+    if url then return new Handlebars.SafeString('<audio id="'+a.file+'" class="solo-audio"><source src="'+url+'"></audio>')
+      
+Ember.Handlebars.registerBoundHelper "downloadAuditionAudio", (a, files) ->
+  if a.file
+    file = null
+    files.forEach (f) -> if a.file is f.id then file = f
+    if file then return new Handlebars.SafeString('<a class="icon-box-add" href="'+file.url+'" download="'+file.name+'" title="download '+file.name+'"></a>')
+      
 Ember.TextField.reopen
   attributeBindings: ["required"]
