@@ -101,6 +101,13 @@
     <div class="control-group">
       <div class="controls">
         <label class="checkbox">
+          {{view Ember.Checkbox checkedBinding="needsMixing"}} I'd like other members to mix the project for me
+        </label>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <label class="checkbox">
           {{view Ember.Checkbox checkedBinding="agreeToTerms"}} I agree to the {{#linkTo 'terms'}}terms of use{{/linkTo}}
         </label>
         <button type="submit" class="btn btn-primary"  {{bindAttr disabled="hasNotAgreed"}} {{action "submitProject"}}>Create Project</button>

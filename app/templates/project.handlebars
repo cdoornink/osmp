@@ -9,19 +9,21 @@
 </div>
 
 {{#if isMine}}
+{{#unless tracksLocked}}
 <h3>Upload Tracks</h3>
 <div class="initial-tracks">
   {{#if isSetupMode}}
-    <h4>Almost done with setup. Upload your tracks and click Complete.</h4>
+    <h4>Almost done setting up. Upload your tracks and click Complete.</h4>
     <div class='tips'>
       <h4> Tips</h4>
       <ol>
         <li>Upload each track as a separate file</li>
+        <li>Tracks must be in mp3 format</li>
         <li>Each track NEEDS to start at the very beginning of the project (bar 1, beat 1)</li>
         <li>Keep your tracks free of any effects (fades, compression, etc)</li> 
       </ol>
     </div>
-  {{else}}
+  {{else}}  
     <h5>As the creator of this project, you can still add tracks to the project, but be very careful what you change since this project is now open to other users to collaborate on.</h5>
   {{/if}}
   {{#view App.OwnerUploadView contentBinding="this"}}
@@ -42,6 +44,7 @@
 <div id="owner-progress" class="progress progress-striped active">
     <div class="bar" style="width: 0%;"></div>
 </div>
+{{/unless}}
 {{/if}}
 
 <div class="rough-mix">
@@ -54,6 +57,33 @@
   <div id="rough-mix-progress" class="rough-mix-progress progress progress-striped">
     <div class="bar" style="height: 5px; width: 0%;"></div>
   </div>
+  {{#if isMine}}
+    <div class="mixing-needed-bar">
+      {{#if readyToMix}}
+        {{#if needsMixing}}
+          Tracks are locked for mixing
+        {{else}}
+          Be sure to upload the final version of the file when you are finished mixing.
+        {{/if}}
+      {{else}}
+        {{#if mixFinal}}
+          Final Mix here HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE
+        {{else}}
+          <button class="btn btn-small btn-warning" {{action setReadyToMix}}>All Tracks Finished</button>
+          <span class="pull-right" style="margin-right:10px">Ready for mixing? </span> 
+        {{/if}} 
+      {{/if}}
+    </div>
+  {{else}}
+    {{#if mixFinal}}
+    Final Mix here HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE
+      <div class="mixing-needed-bar">
+        {{#each file in files}}
+          {{#if file.isAcceptedMix}}<tr>{{view App.TrackView contentBinding="file"}}</tr>{{/if}}
+        {{/each}}
+      </div>
+    {{/if}}
+  {{/if}}
   {{#each file in files}}
     {{#if file.isAccepted}}
       {{#view App.AcceptedAudioFileView}}
@@ -70,6 +100,87 @@
 </div>
 
 <h3>Parts</h3>
+
+{{#if needsMixing}}
+{{#if readyToMix}}
+<div class="need-options">
+  <h4><div class="role-icon icon-mixing" title="mixing"></div> Mixing</h4>
+  <p>{{need.details}}</p>
+  {{#if mix.isMine}}
+    {{#if mix.isAccepted}}
+      <div class="need-status">Congratulations! Your mix was accepted!</div>
+    {{else}}
+      {{#if mix.isOpen}}
+        {{#if mix.isSubmitted}}
+          <div class="need-status">You have submitted your mix and are waiting for the owner to accept or reject it</div>
+        {{else}}
+          {{#if mix.isRejected}}
+            <div class="need-status">Sorry, your mix was not accepted</div>
+          {{else}}
+            <div class="need-status">You are mixing this project</div>
+  
+            {{#view App.MixUploadView contentBinding="mix"}}
+              <div class="fileupload fileupload-new pull-left" data-provides="fileupload">
+                <span class="btn btn-file btn-success">
+                  <span class="fileupload-new">Submit Mix</span>
+                  <input id="mix-fileupload" type="file" name="files[]" data-url="server/php/" multiple>
+                </span>
+                <span class="fileupload-preview"></span>
+              </div>
+            {{/view}}
+            <div id="mix-progress" class="progress progress-striped active">
+                <div class="bar" style="width: 0%;"></div>
+            </div>
+          {{/if}}
+        {{/if}}
+      {{else}}
+        <div class="need-status">This part is {{mix.status}}</div>
+      {{/if}}
+    {{/if}}
+  {{else}}
+    <div class="need-status">This part is {{mix.status}}</div>
+    {{#if mix.isOpen}}
+      {{#if isMine}}
+        <button class="btn btn-primary" {{action closeMix}}>Close</button>
+      {{else}}
+        <button class="btn btn-primary" {{action auditionMix}}>Audition</button>
+      {{/if}}
+    {{else}}
+       {{#if isMine}}<button class="btn btn-primary" {{action reopenMix}}>Reopen</button>{{/if}}
+    {{/if}}
+  {{/if}}
+</div> 
+<div class="auditions">
+  {{#each audition in mix.auditions}}
+    {{#if audition.id}}
+      {{#view App.AuditionListView contentBinding="audition"}}
+        {{auditionText audition}}
+        {{#if audition.file}}
+          {{#if isMine}}
+            <button class="btn btn-success btn-small" {{action acceptMix audition}}>Accept</button>
+            <button class="btn btn-danger btn-small" {{action rejectMix audition}}>Reject</button>
+          {{/if}}
+          <div class="audition-file pull-right">
+            <span {{action playSolo audition.file}} class="solo-play-button icon-play-2" title="play solo track"></span> 
+            {{playAuditionSolo audition files}}
+            {{#if audition.isMine}}
+              {{#if audition.isAccepted}}
+                {{downloadAuditionAudio audition files}}
+              {{else}}
+                <span class="icon-remove" title="delete track" {{action deleteAuditionAudio mix audition}}></span>
+              {{/if}}
+            {{else}}
+              {{downloadAuditionAudio audition files}}
+            {{/if}}
+          </div>
+        {{/if}}
+      {{/view}}
+    {{/if}}
+  {{/each}}
+</div>
+{{/if}}
+{{/if}}
+
 
 {{#each need in needs}}
 <div class="need-options">
@@ -115,7 +226,7 @@
         <button class="btn btn-primary" {{action audition need}}>Audition</button>
       {{/if}}
     {{else}}
-       {{#if isMine}}<button class="btn btn-primary" {{action reopenNeed need}}>Reopen</button>{{/if}}
+       {{#if isMine}}{{#unless isClosed}}<button class="btn btn-primary" {{action reopenNeed need}}>Reopen</button>{{/unless}}{{/if}}
     {{/if}}
   {{/if}}
 </div>

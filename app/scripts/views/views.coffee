@@ -50,6 +50,26 @@ App.AuditionerUploadView = Ember.View.extend
         $('#auditioner-progress .bar').css 'width', '0%'
         $.each data.result.files, (index, file) ->
           that.get('controller').addAuditionerFile(file, that.get('content'))
+
+App.MixUploadView = Ember.View.extend
+  classNames: ["owner-upload-container"]
+  didInsertElement: ->
+    that = this
+    $('#mix-fileupload').fileupload
+      dataType: 'json'
+      add: (e, data) ->
+        uploadFile = data.files[0];
+        if (!(/\.(mp3)$/i).test(uploadFile.name))
+          alert "You can only upload mp3 files."
+        else
+          data.submit()
+      progressall: (e, data) ->
+        progress = (data.loaded / data.total) * 100
+        $('#mix-progress .bar').css 'width', progress + '%'
+      done: (e, data) ->
+        $('#mix-progress .bar').css 'width', '0%'
+        $.each data.result.files, (index, file) ->
+          that.get('controller').addMixFile(file)
   
 
 App.TrackView = Ember.View.extend

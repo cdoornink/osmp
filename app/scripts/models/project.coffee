@@ -5,11 +5,25 @@ App.Project = Ember.Object.extend
   isSetupMode: (->
     return true if @status is "Setup"
   ).property('status')
+  tracksLocked: (->
+    return true if @status is "TracksComplete" or @status is "closed"
+  ).property('status')
+  readyToMix: (->
+    return true if @status is "TracksComplete"
+  ).property('status')
+  mixFinal: (->
+    return true if @status is "closed"
+  ).property('status')
+  isClosed: (->
+    return true if @status is "closed"
+  ).property('status')
   setProjectProperties: (p) ->
     needs = []
     if p.needs then p.needs.forEach (n) -> needs.addObject App.Need.create().setNeedProperties(n)
     files = []
     if p.files then p.files.forEach (f) -> files.addObject App.File.create().setProperties(f)
+    mix = null
+    if p.mix then mix = App.Mix.create().setProperties(p.mix)
     @set 'needs', needs
     @set 'id', p.osmpid
     @set 'name', p.name
@@ -19,7 +33,10 @@ App.Project = Ember.Object.extend
     @set 'files', files
     @set 'credits', p.credits
     @set 'createdDate', p.created_date
-    @set 'lastUpdated', p.last_updated 
+    @set 'lastUpdated', p.last_updated
+    @set 'needsMixing', p.needsMixing
+    @set 'mix', mix
+    @set 'needsMastering', p.needsMastering
     @set 'status', p.status
     
 App.Project.reopenClass
@@ -66,6 +83,8 @@ App.Project.reopenClass
     if data.needs then data.needs.forEach (n) -> needs.addObject App.Need.toJSON(n)
     files = []
     if data.files then data.files.forEach (f) -> files.addObject App.File.toJSON(f)
+    mix = null
+    if data.mix then mix = App.Mix.toJSON(data.mix)
     project = 
       osmpid: data.id
       user: data.user
@@ -78,4 +97,7 @@ App.Project.reopenClass
       credits: data.credits
       created_date: data.createdDate
       last_updated: data.lastUpdated
+      needsMixing: data.needsMixing
+      mix: mix
+      needsMastering: data.needsMastering
       status: data.status

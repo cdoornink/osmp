@@ -15,6 +15,9 @@ App.File = Ember.Object.extend
   isAccepted: (->
     return true if @status is "accepted"
   ).property('status')
+  isAcceptedMix: (->
+    return true if @status is "acceptedMix"
+  ).property('status')
   isMine: (->
     console.log @user
     return true if @user.name is App.me.name

@@ -7,6 +7,8 @@ App.CreateController = Ember.ObjectController.extend
   genre: null
   agreeToTerms: false
   hasNotAgreed: Ember.computed.not('agreeToTerms')
+  needsMixing: false
+  needsMastering: false
   need1: null
   need2: null
   need3: null
@@ -55,6 +57,8 @@ App.CreateController = Ember.ObjectController.extend
       genre: @genre 
       creator: {"id": App.me.get('id'), "name": App.me.name}
       needs: @project_needs
+      needsMixing: @needsMixing
+      needsMastering: @needsMastering
       created_date: new Date()
       last_updated: new Date()
       status: "Setup"
