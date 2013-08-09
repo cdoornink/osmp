@@ -17,6 +17,9 @@ App.Project = Ember.Object.extend
   isClosed: (->
     return true if @status is "closed"
   ).property('status')
+  doesNeedMixing: (->
+    return true if @status is "true"
+  ).property('needsMixing')
   setProjectProperties: (p) ->
     needs = []
     if p.needs then p.needs.forEach (n) -> needs.addObject App.Need.create().setNeedProperties(n)

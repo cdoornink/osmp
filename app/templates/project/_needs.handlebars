@@ -1,0 +1,78 @@
+{{#each need in needs}}
+<div class="need-options">
+  <h4>{{needsIcon need}} {{need.role}}</h4>
+  <p>{{need.details}}</p>
+  {{#if need.isMine}}
+    {{#if need.isAccepted}}
+      <div class="need-status">Congratulations! Your track was accepted for this part! You should see it in the Rough Mix above.</div>
+    {{else}}
+      {{#if need.isOpen}}
+        {{#if need.isSubmitted}}
+          <div class="need-status">You have submitted your track for this part and are waiting for the owner to accept or reject it</div>
+        {{else}}
+          {{#if need.isRejected}}
+            <div class="need-status">Sorry, your track was not accepted for this part.</div>
+          {{else}}
+            <div class="need-status">You are auditioning for this part</div>
+  
+            {{#view App.AuditionerUploadView contentBinding="need"}}
+              <div class="fileupload fileupload-new pull-left" data-provides="fileupload">
+                <span class="btn btn-file btn-success">
+                  <span class="fileupload-new">Submit Track</span>
+                  <input id="auditioner-fileupload" type="file" name="files[]" data-url="server/php/" multiple>
+                </span>
+                <span class="fileupload-preview"></span>
+              </div>
+            {{/view}}
+            <div id="auditioner-progress" class="progress progress-striped active">
+                <div class="bar" style="width: 0%;"></div>
+            </div>
+          {{/if}}
+        {{/if}}
+      {{else}}
+        <div class="need-status">This part is {{need.status}}</div>
+      {{/if}}
+    {{/if}}
+  {{else}}
+    <div class="need-status">This part is {{need.status}}</div>
+    {{#if need.isOpen}}
+      {{#if isMine}}
+        <button class="btn btn-primary" {{action closeNeed need}}>Close</button>
+      {{else}}
+        <button class="btn btn-primary" {{action audition need}}>Audition</button>
+      {{/if}}
+    {{else}}
+       {{#if isMine}}{{#unless isClosed}}<button class="btn btn-primary" {{action reopenNeed need}}>Reopen</button>{{/unless}}{{/if}}
+    {{/if}}
+  {{/if}}
+</div>
+<div class="auditions">
+  {{#each audition in need.auditions}}
+    {{#if audition.id}}
+      {{#view App.AuditionListView contentBinding="audition"}}
+        {{auditionText audition}}
+        {{#if audition.file}}
+          {{#if isMine}}
+            <button class="btn btn-success btn-small" {{action changeAuditionStatus need audition 'accepted'}}>Accept</button>
+            <button class="btn btn-danger btn-small" {{action changeAuditionStatus need audition 'rejected'}}>Reject</button>
+          {{/if}}
+          <div class="audition-file pull-right">
+            <span {{action playSolo audition.file}} class="solo-play-button icon-play-2" title="play solo track"></span> 
+            {{#unless audition.isAccepted}}<span {{action toggleMix audition.file}} class="toggle-mix-button icon-equalizer" title="add to the rough mix"></span>{{/unless}}
+            {{playAuditionSolo audition files}}
+            {{#if audition.isMine}}
+              {{#if audition.isAccepted}}
+                {{downloadAuditionAudio audition files}}
+              {{else}}
+                <span class="icon-remove" title="delete track" {{action deleteAuditionAudio need audition}}></span>
+              {{/if}}
+            {{else}}
+              {{downloadAuditionAudio audition files}}
+            {{/if}}
+          </div>
+        {{/if}}
+      {{/view}}
+    {{/if}}
+  {{/each}}
+</div>
+{{/each}}

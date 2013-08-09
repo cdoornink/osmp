@@ -43,6 +43,9 @@ Ember.Handlebars.registerBoundHelper "playAuditionSolo", (a, files) ->
     url = null
     files.forEach (f) -> if a.file is f.id then url = f.url
     if url then return new Handlebars.SafeString('<audio id="'+a.file+'" class="solo-audio"><source src="'+url+'"></audio>')
+
+Ember.Handlebars.registerBoundHelper "finalMixAudio", (file) ->
+  if file.url then return new Handlebars.SafeString('<audio id="'+file.id+'" class="solo-audio"><source src="'+file.url+'"></audio>')
       
 Ember.Handlebars.registerBoundHelper "downloadAuditionAudio", (a, files) ->
   if a.file

@@ -1,0 +1,38 @@
+{{#if isMine}}
+{{#unless tracksLocked}}
+<h3>Upload Tracks</h3>
+<div class="initial-tracks">
+  {{#if isSetupMode}}
+    <h4>Almost done setting up. Upload your tracks and click Complete.</h4>
+    <div class='tips'>
+      <h4> Tips</h4>
+      <ol>
+        <li>Upload each track as a separate file</li>
+        <li>Tracks must be in mp3 format</li>
+        <li>Each track NEEDS to start at the very beginning of the project (bar 1, beat 1)</li>
+        <li>Keep your tracks free of any effects (fades, compression, etc)</li> 
+      </ol>
+    </div>
+  {{else}}  
+    <h5>As the creator of this project, you can still add tracks to the project, but be very careful what you change since this project is now open to other users to collaborate on.</h5>
+  {{/if}}
+  {{#view App.OwnerUploadView contentBinding="this"}}
+    <div class="controls">{{view Ember.Select contentBinding="App.parts" valueBinding="uploadRole"}}</div>
+
+    <div class="fileupload fileupload-new pull-left" data-provides="fileupload">
+      <span class="btn btn-file btn-primary">
+        <span class="fileupload-new">Upload Track</span>
+        <input id="owner-fileupload" type="file" name="files[]" data-url="server/php/" multiple>
+      </span>
+      <span class="fileupload-preview"></span>
+    </div>
+    {{#if isSetupMode}}
+    <button class="btn btn-success pull-right" {{action completeSetup}}>Complete Setup</button>
+    {{/if}}
+  {{/view}}
+</div>
+<div id="owner-progress" class="progress progress-striped active">
+    <div class="bar" style="width: 0%;"></div>
+</div>
+{{/unless}}
+{{/if}}

@@ -1,0 +1,79 @@
+{{#if doesNeedMixing}}
+{{#if readyToMix}}
+<div class="need-options">
+  <h4><div class="role-icon icon-mixing" title="mixing"></div> Mixing</h4>
+  <p>{{need.details}}</p>
+  {{#if mix.isMine}}
+    {{#if mix.isAccepted}}
+      <div class="need-status">Congratulations! Your mix was accepted!</div>
+    {{else}}
+      {{#if mix.isOpen}}
+        {{#if mix.isSubmitted}}
+          <div class="need-status">You have submitted your mix and are waiting for the owner to accept or reject it</div>
+        {{else}}
+          {{#if mix.isRejected}}
+            <div class="need-status">Sorry, your mix was not accepted</div>
+          {{else}}
+            <div class="need-status">You are mixing this project</div>
+  
+            {{#view App.MixUploadView contentBinding="mix"}}
+              <div class="fileupload fileupload-new pull-left" data-provides="fileupload">
+                <span class="btn btn-file btn-success">
+                  <span class="fileupload-new">Submit Mix</span>
+                  <input id="mix-fileupload" type="file" name="files[]" data-url="server/php/" multiple>
+                </span>
+                <span class="fileupload-preview"></span>
+              </div>
+            {{/view}}
+            <div id="mix-progress" class="progress progress-striped active">
+                <div class="bar" style="width: 0%;"></div>
+            </div>
+          {{/if}}
+        {{/if}}
+      {{else}}
+        <div class="need-status">This part is {{mix.status}}</div>
+      {{/if}}
+    {{/if}}
+  {{else}}
+    <div class="need-status">This part is {{mix.status}}</div>
+    {{#if mix.isOpen}}
+      {{#if isMine}}
+        <button class="btn btn-primary" {{action closeMix}}>Close</button>
+      {{else}}
+        <button class="btn btn-primary" {{action auditionMix}}>Audition</button>
+      {{/if}}
+    {{else}}
+       {{#if isMine}}<button class="btn btn-primary" {{action reopenMix}}>Reopen</button>{{/if}}
+    {{/if}}
+  {{/if}}
+</div> 
+<div class="auditions">
+  {{#each audition in mix.auditions}}
+    {{#if audition.id}}
+      {{#view App.AuditionListView contentBinding="audition"}}
+        {{auditionText audition}}
+        {{#if audition.file}}
+          {{#if isMine}}
+            <button class="btn btn-success btn-small" {{action acceptMix audition}}>Accept</button>
+            <button class="btn btn-danger btn-small" {{action rejectMix audition}}>Reject</button>
+          {{/if}}
+          <div class="audition-file pull-right">
+            <span {{action playSolo audition.file}} class="solo-play-button icon-play-2" title="play solo track"></span> 
+            {{playAuditionSolo audition files}}
+            {{#if audition.isMine}}
+              {{#if audition.isAccepted}}
+                {{downloadAuditionAudio audition files}}
+              {{else}}
+                <span class="icon-remove" title="delete track" {{action deleteAuditionAudio mix audition}}></span>
+              {{/if}}
+            {{else}}
+              {{downloadAuditionAudio audition files}}
+            {{/if}}
+          </div>
+        {{/if}}
+      {{/view}}
+    {{/if}}
+  {{/each}}
+</div>
+{{/if}}
+{{/if}}

@@ -5,6 +5,11 @@ App.ProjectController = Ember.ObjectController.extend
   update: -> 
     @content.set 'lastUpdated', new Date()
     App.Project.update @content.id, App.Project.toJSON(@content)
+  close: ->
+    @content.mix.set 'status', 'closed'
+    @content.set 'status', "closed"
+    @content.needs.forEach (n) ->
+      n.set 'status', 'closed'
   setReadyToMix: ->
     @content.set 'status', "TracksComplete"    
     mix = App.Mix.create().setProperties({status: 'open'})
@@ -29,8 +34,7 @@ App.ProjectController = Ember.ObjectController.extend
           file.set('status', 'acceptedMix')
         files.addObject(file)  
       @content.set 'files', files
-    @content.mix.set 'status', 'closed'
-    @content.set 'status', "closed"
+    @close()
     @update()
   rejectMix: (rejectingAudition) ->
     auditions = []
@@ -122,22 +126,27 @@ App.ProjectController = Ember.ObjectController.extend
     @update()
   addMixFile: (f) ->
     id = new Date().getTime()
-    auditions = []
-    @content.mix.auditions.forEach (a) -> 
-      audition = App.Audition.create().setProperties(a)
-      if audition.get('id') is App.me.get('id')
-        audition.set 'status', 'submitted'
-        audition.set 'file', id
-        audition.set 'lastUpdated', new Date()
-        a = audition
-      auditions.addObject(audition)
-    @content.mix.set('auditions', auditions)
+    unless App.me.get('id') is @content.get('creator.id')
+      auditions = []
+      @content.mix.auditions.forEach (a) -> 
+        audition = App.Audition.create().setProperties(a)
+        if audition.get('id') is App.me.get('id')
+          audition.set 'status', 'submitted'
+          audition.set 'file', id
+          audition.set 'lastUpdated', new Date()
+          a = audition
+        auditions.addObject(audition)
+      @content.mix.set('auditions', auditions)
     file = App.File.create().setProperties(f)
     file.set('role', "mixing")
     file.set('id', id)
     file.set('date', new Date())
     file.set('user', {id: App.me.get('id'), name: App.me.name})
-    file.set('status', "submittedMix")
+    unless App.me.get('id') is @content.get('creator.id')
+      file.set('status', "submittedMix")
+    else
+      file.set('status', "acceptedMix")
+      @close()
     files = @content.get('files')
     if files then @content.get('files').addObject(file) else @content.set('files', [file])
     @content.set 'lastUpdated', new Date()
@@ -230,6 +239,16 @@ App.ProjectController = Ember.ObjectController.extend
       @currentTime = 0
     else
       alert "There was an error trying to play the rough tracks. This only works in Chrome last I checked."
+  playFinalMix: (id) ->
+    audio = $('#'+id)[0]
+    if audio then audio.play()
+    $(".final-mix-play-button").hide()
+    $(".final-mix-pause-button").show()
+  pauseFinalMix: (id) ->
+    audio = $('#'+id)[0]
+    if audio then audio.pause()
+    $(".final-mix-play-button").show()
+    $(".final-mix-pause-button").hide()
   playSolo: (id) ->
     audio = $('#'+id)[0]
     if audio then audio.play()
