@@ -29,6 +29,9 @@ module.exports = function(grunt) {
             'app/scripts/helpers/*', 
             'app/scripts/data/*', 
             'app/scripts/models/*'
+          ],
+          'build/js/tests.js': [
+            'ember-testing/tests/*'          
           ]
         }
       }
@@ -118,7 +121,10 @@ module.exports = function(grunt) {
           {expand: true, cwd: "build/css", src: ['**'], dest: "dist/dev/css"},
           {expand: true, cwd: "server", src: ['**'], dest: "dist/dev/server"},
           {src: ['index.html'], dest: "dist/dev/"},
-          {src: ['favicon.ico'], dest: "dist/dev/"}
+          {src: ['favicon.ico'], dest: "dist/dev/"},
+          {src: ['ember-testing/index.html'], dest: "dist/dev/"},
+          {expand: true, cwd: "build/js", src: ['tests.js'], dest: "dist/dev/ember-testing/js"},
+          {expand: true, cwd: "bower_components/qunit/qunit", src: ['**'], dest: "dist/dev/ember-testing/qunit"},
         ]
       },
       prod: {

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<!--[if lt IE 9]><script language="javascript" type="text/javascript" src="js/libs/excanvas.min.js"></script><![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Source Music Project</title>
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/ember-testing/qunit/qunit.css"/>
+  </head>
+  <body>  
+    <div id="ember-testing-container">
+      <div id="ember-testing">
+      </div>
+    </div>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="/js/vendor.js"></script>
+    <script src="/js/app.js"></script>
+    <style>
+      #ember-testing-container {
+        position: absolute;
+        background: white;
+        bottom: 0;
+        right: 0;
+        width: 640px;
+        height: 384px;
+        overflow: auto;
+        z-index: 9999;
+        border: 1px solid #ccc;
+      }
+      #ember-testing { zoom: 50%; }
+    </style>
+    <script>
+      App.rootElement = '#ember-testing';
+      App.setupForTesting();
+      App.injectTestHelpers();
+
+      function exists(selector) {
+          return !!find(selector).length;
+      }
+    </script>
+    <script src="/ember-testing/qunit/qunit.js"></script>
+    <script src="/ember-testing/js/tests.js"></script>
+    
+  </body>
+</html>

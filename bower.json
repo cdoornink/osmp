@@ -9,6 +9,7 @@
     "ember-dev": "http://builds.emberjs.com.s3.amazonaws.com/ember-1.0.0-rc.5.js",
     "moment": "https://raw.github.com/timrwood/moment/2.0.0/min/moment.min.js",
     "jquery-file-upload": "git://github.com/blueimp/jQuery-File-Upload.git",
-    "md5": "http://www.myersdaily.org/joseph/javascript/md5.js"
+    "md5": "http://www.myersdaily.org/joseph/javascript/md5.js",
+    "qunit": "1.11.0"
   }
 }
