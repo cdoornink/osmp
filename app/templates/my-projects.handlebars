@@ -16,7 +16,7 @@
         {{/each}}
       {{/view}}
       {{else}}
-      You haven't created any projects yet. {{#linkTo create}}Create a Project{{/linkTo}}
+      You haven't created any projects yet. {{#link-to 'create'}}Create a Project{{/link-to}}
       {{/if}}
     </div>
     <div class="tab-pane" id="B">
@@ -27,7 +27,7 @@
         {{/each}}
       {{/view}}
       {{else}}
-      You aren't participating in any projects yet. {{#linkTo projects}}Browse Current Projects{{/linkTo}}
+      You aren't participating in any projects yet. {{#link-to 'projects'}}Browse Current Projects{{/link-to}}
       {{/if}}      
     </div>
   </div>
