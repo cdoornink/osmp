@@ -61,7 +61,7 @@ App.CreateController = Ember.ObjectController.extend
       needsMastering: @needsMastering
       created_date: new Date()
       last_updated: new Date()
-      status: "Setup"
+      status: "setup"
     App.Project.new {project: project}
     if App.me.content.get('projects')
       App.me.content.projects.push(id)

@@ -7,6 +7,10 @@ App.ProjectListView = Ember.View.extend
 App.ProjectListItemView = Ember.View.extend
   templateName: 'project-list-item'
   classNames: ['project-list-item-container', 'row']
+  classNameBindings: ['getStatus']
+  getStatus: (->
+    this.content.get('status')
+  ).property('content.status')
   didInsertElement: ->
     $('.role-icon').tooltip()
 

@@ -3,13 +3,13 @@ App.Project = Ember.Object.extend
     return true if @creator and @creator.id is App.me.id
   ).property('creator.id')
   isSetupMode: (->
-    return true if @status is "Setup"
+    return true if @status is "setup"
   ).property('status')
   tracksLocked: (->
-    return true if @status is "TracksComplete" or @status is "closed"
+    return true if @status is "mixing" or @status is "closed"
   ).property('status')
   readyToMix: (->
-    return true if @status is "TracksComplete"
+    return true if @status is "mixing"
   ).property('status')
   mixFinal: (->
     return true if @status is "closed"
@@ -18,7 +18,7 @@ App.Project = Ember.Object.extend
     return true if @status is "closed"
   ).property('status')
   doesNeedMixing: (->
-    return true if @status is "true"
+    return true if @needsMixing is "true"
   ).property('needsMixing')
   setProjectProperties: (p) ->
     needs = []

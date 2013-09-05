@@ -57,6 +57,22 @@ body
   padding-top: 15px
   margin-bottom: 3px
   background: $light_blue
+.project-list-item-container.setup
+  border-left: 3px solid $light_red
+  .project-status
+    color: $light_red
+.project-list-item-container.open
+  border-left: 3px solid $green
+  .project-status
+    color: $green
+.project-list-item-container.mixing
+  border-left: 3px solid $red
+  .project-status
+    color: $red
+.project-list-item-container.closed
+  border-left: 3px solid $dark_blue
+  .project-status
+    color: $dark_blue
 @media (max-width: 767px)
   .project-list-item-container
     padding: 10px
@@ -76,6 +92,9 @@ body
 .project-genre
   font-size: 13px
   color: #444
+.project-status
+  font-size: 13px
+  color: #444
 .project-needs-summary
   float: left
   font-size: 45px
@@ -84,7 +103,7 @@ body
     margin-left: 10px
 .role-icon.closed
   opacity: 0.5
-    
+   
 .project-header
   h2
     margin-bottom: 0

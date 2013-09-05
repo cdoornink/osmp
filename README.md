@@ -1,4 +1,4 @@
-osmp
+Recordinate
 ====
 
-open source music project
+The open source music project.

@@ -3,10 +3,15 @@
 <div class="project-name">{{#linkTo project this}}{{name}}{{/linkTo}}</div>
 <div class="project-creator">Created by {{creator.name}} {{fromNow createdDate}}</div>
 <div class="project-genre">{{genre}}</div>
+<div class="project-status">Status: {{status}}</div>
 </div>
 <div class="project-needs-summary span7">
   {{#each need in needs}}
     {{needsIcon need}}
   {{/each}}
+  {{#if doesNeedMixing}}{{#if readyToMix}}
+    <div class="role-icon icon-mixing open" title="mixing (open)"></div>
+  {{/if}}{{/if}}
 </div>
+
 {{/with}}

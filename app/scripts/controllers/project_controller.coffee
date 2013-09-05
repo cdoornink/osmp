@@ -11,7 +11,7 @@ App.ProjectController = Ember.ObjectController.extend
     @content.needs.forEach (n) ->
       n.set 'status', 'closed'
   setReadyToMix: ->
-    @content.set 'status', "TracksComplete"    
+    @content.set 'status', "mixing"    
     mix = App.Mix.create().setProperties({status: 'open'})
     @content.set 'mix', mix
     @update()
@@ -210,7 +210,7 @@ App.ProjectController = Ember.ObjectController.extend
     @content.mix.set('status', 'closed')
     @update()
   reopenMix: ->
-    @content.set 'status', 'tracksComplete'
+    @content.set 'status', 'mixing'
     @content.mix.set('status', 'open')
     @update()
   closeNeed: (p) ->
