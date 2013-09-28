@@ -11,7 +11,7 @@ App.Router.map ->
   @resource 'terms'
   
 App.ApplicationRoute = Ember.Route.extend
-  enter: ->
+  beforeModel: ->
     App.me.set 'username', localStorage.getItem('username')
     App.me.set 'password', localStorage.getItem('password')
     App.me.tryLogin(true)
