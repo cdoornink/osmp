@@ -10,6 +10,7 @@
     "moment": "https://raw.github.com/timrwood/moment/2.0.0/min/moment.min.js",
     "jquery-file-upload": "git://github.com/blueimp/jQuery-File-Upload.git",
     "md5": "http://www.myersdaily.org/joseph/javascript/md5.js",
-    "qunit": "1.11.0"
+    "qunit": "1.11.0",
+    "emblem": "~0.3.2"
   }
 }

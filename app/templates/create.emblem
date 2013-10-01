@@ -1,0 +1,87 @@
+.upload-page
+  form.form-horizontal.offset2.span6
+    h2 New Project
+    legend Basic Information
+    .control-group
+      label.control-label Project Name
+      .controls: Ember.TextField valueBinding="name"
+    .control-group
+      label.control-label Description
+      .controls: Ember.TextArea valueBinding="description"
+    .control-group
+      label.control-label Genre
+      .controls: Ember.Select contentBinding="App.genres" valueBinding="genre"
+    legend Project Needs
+    .control-group
+      label.control-label Role
+      .controls: Ember.Select contentBinding="App.parts" valueBinding="need1"
+    .control-group
+      label.control-label Details
+      .controls: Ember.TextArea valueBinding="details1"
+    .control-group.need2
+      label.control-label Role
+      .controls: Ember.Select contentBinding="App.parts" valueBinding="need2"
+    .control-group.need2
+      label.control-label Details
+      .controls: Ember.TextArea valueBinding="details2"
+    .control-group.need3
+      label.control-label Role
+      .controls: Ember.Select contentBinding="App.parts" valueBinding="need3"
+    .control-group.need3
+      label.control-label Details
+      .controls: Ember.TextArea valueBinding="details3"
+    .control-group.need4
+      label.control-label Role
+      .controls: Ember.Select contentBinding="App.parts" valueBinding="need4"
+    .control-group.need4
+      label.control-label Details
+      .controls: Ember.TextArea valueBinding="details4"
+    .control-group.need5
+      label.control-label Role
+      .controls: Ember.Select contentBinding="App.parts" valueBinding="need5"
+    .control-group.need5
+      label.control-label Details
+      .controls: Ember.TextArea valueBinding="details5"
+    .control-group.need6
+      label.control-label Role
+      .controls: Ember.Select contentBinding="App.parts" valueBinding="need6"
+    .control-group.need6
+      label.control-label Details
+      .controls: Ember.TextArea valueBinding="details6"  
+    .control-group.need7
+      label.control-label Role
+      .controls: Ember.Select contentBinding="App.parts" valueBinding="need7"
+    .control-group.need7
+      label.control-label Details
+      .controls: Ember.TextArea valueBinding="details7"  
+    .control-group.need8
+      label.control-label Role
+      .controls: Ember.Select contentBinding="App.parts" valueBinding="need8"
+    .control-group.need8
+      label.control-label Details
+      .controls: Ember.TextArea valueBinding="details8"  
+    .control-group.need9
+      label.control-label Role
+      .controls: Ember.Select contentBinding="App.parts" valueBinding="need9"
+    .control-group.need9
+      label.control-label Details
+      .controls: Ember.TextArea valueBinding="details9"  
+    .control-group.need10
+      label.control-label Role
+      .controls: Ember.Select contentBinding="App.parts" valueBinding="need10"
+    .control-group.need10
+      label.control-label Details
+      .controls: Ember.TextArea valueBinding="details10"
+    .control-group.add-need-button
+      .controls: button.btn.btn-info{action "addNeed"} Add Another Need
+    .control-group
+      .controls
+        label.checkbox
+          Ember.Checkbox checkedBinding="needsMixing" 
+          | I'd like other members to mix the project for me
+    .control-group
+      .controls
+        label.checkbox
+          Ember.Checkbox checkedBinding="agreeToTerms"
+          | I agree to the {{link-to 'terms' | terms of use}}
+        button.btn.btn-primary{action "submitProject"} type="submit" disabled="hasNotAgreed" Create Project

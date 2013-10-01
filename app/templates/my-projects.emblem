@@ -1,0 +1,21 @@
+.row-fluid.browse-header: h2 My Projects
+
+ul.nav.nav-tabs
+  li.active: a href="#A" data-toggle="tab" Created by me
+  li: a href="#B" data-toggle="tab" Participating in
+
+.tabbable: .tab-content
+  .tab-pane.active#A
+    if controller.created
+      App.ProjectListView
+        each project in controller.created
+          App.ProjectListItemView contentBinding='project'
+    else
+      .no-data You haven't created any projects yet. {{link-to 'create' | Create a Project}}
+  .tab-pane#B
+    if controller.participating
+      App.ProjectListView
+        each project in controller.participating
+          App.ProjectListItemView contentBinding='project'
+    else
+      .no-data You aren't participating in any projects yet. {{link-to 'projects' | Browse Current Projects}}

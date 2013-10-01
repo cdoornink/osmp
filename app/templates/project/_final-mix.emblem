@@ -1,0 +1,9 @@
+if mixFinal
+  each file in files
+    if file.isAcceptedMix
+      .final-mix-section: h3
+        span.final-mix-play-button.icon-play-2{action playFinalMix file.id} title="play final mix"
+        span.final-mix-pause-button.icon-pause-2{action pauseFinalMix file.id} title="pause final mix"
+        finalMixAudio file
+        ' Final Mix    
+        small mixed by {{file.user.name}}

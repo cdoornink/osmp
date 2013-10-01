@@ -1,0 +1,33 @@
+.signup-page
+  form.form-horizontal.offset2.span6
+    h2 Sign Up
+    
+    .control-group.first-name-signup-group
+      label.control-label First Name
+      .controls: Ember.TextField valueBinding="firstName" required="true"
+    
+    .control-group.last-name-signup-group
+      label.control-label Last Name
+      .controls: Ember.TextField valueBinding="lastName" required="true"
+
+    .control-group.email-signup-group
+      label.control-label Email Address
+      .controls
+        Ember.TextField valueBinding="email" type="email" required="true"
+        span.help-inline Email is already taken
+    
+    .control-group.password-signup-group
+      label.control-label Password
+      .controls: Ember.TextField valueBinding="password" type="password" required="true"
+    
+    .control-group
+      .controls
+        label.checkbox
+          Ember.Checkbox checkedBinding="agreeToTerms"
+          ' I agree to the 
+          link-to 'terms' | terms of use
+        button.btn.btn-primary{action "trySignup"} type="submit" disabled=hasNotAgreed Sign Up
+    
+    .control-group
+      .controls
+        .already Already a member? {{link-to 'signin' | Sign In }}

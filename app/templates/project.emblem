@@ -1,0 +1,18 @@
+with content
+
+  .row-fluid.project-header
+    h2 
+      ' {{name}} 
+      small {{genre}}
+    h6.description {{description}}
+    h6 Created by {{creator.name}} {{fromNow createdDate}}
+    h6 Last updated {{fromNow lastUpdated}}
+    h6 Status: {{status}}
+
+  partial "project/initial-tracks"
+  partial "project/final-mix"
+  partial "project/rough-mix"
+
+  h3 Parts
+  partial "project/mixing-need"
+  partial "project/needs"

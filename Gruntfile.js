@@ -7,15 +7,19 @@ module.exports = function(grunt) {
       dev: ["build", "dist/dev"],
       prod: ["build", "dist/prod"]
     },
-    emberTemplates: {
+    emblem: {
       compile: {
-        options: {
-          templateName: function(sourceFile) {
-            return sourceFile.replace(/app\/templates\//, '')
-          }
-        },
         files: {
-          'build/templates/templates.js': 'app/templates/**/*.handlebars'
+          'build/templates/templates.js': ['**/*.emblem']
+        },
+        options: {
+          root: 'app/templates/',
+          dependencies: {
+            jquery: 'bower_components/jquery/jquery.js',
+            ember: 'bower_components/ember/index.js',
+            emblem: 'bower_components/emblem/dist/emblem.js',
+            handlebars: 'bower_components/handlebars/index.js'
+          }
         }
       }
     },
@@ -149,7 +153,6 @@ module.exports = function(grunt) {
 
   // Load the plugin that provides the "uglify" task.
   grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-ember-templates');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-watch');
@@ -157,10 +160,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-emblem');
   express = require("express")
   
   grunt.registerTask('default', ['compile', 'webserver', 'watch']);
-  grunt.registerTask('compile', ['clean:dev', 'emberTemplates', 'coffee', 'sass', 'concat:vendor', 'concat:app', 'concat:styles', 'copy:dev']);
+  grunt.registerTask('compile', ['clean:dev', 'emblem', 'coffee', 'sass', 'concat:vendor', 'concat:app', 'concat:styles', 'copy:dev']);
   grunt.registerTask("webserver", "Start a custom static web server.", function(){
     grunt.log.writeln('Starting static web server');
     server = express();
@@ -173,5 +177,5 @@ module.exports = function(grunt) {
     grunt.log.writeln('Listening on port 3000');
     server.listen(3000);
   });  
-  grunt.registerTask('prod', ['clean:prod', 'emberTemplates', 'coffee', 'sass', 'concat:prodVendor', 'concat:prodApp', 'concat:styles', 'cssmin', 'uglify', 'copy:prod']);
+  grunt.registerTask('prod', ['clean:prod', 'emblem', 'coffee', 'sass', 'concat:prodVendor', 'concat:prodApp', 'concat:styles', 'cssmin', 'uglify', 'copy:prod']);
 };

@@ -1,0 +1,12 @@
+with project
+  .project-information.span4
+    .project-name: link-to 'project' this | {{name}}
+    .project-creator Created by {{creator.name}} {{fromNow createdDate}}
+    .project-genre {{genre}}
+    .project-status Status: {{status}}
+  .project-needs-summary.span7
+    each need in needs
+      needsIcon need
+    if doesNeedMixing
+      if readyToMix
+        .role-icon.icon-mixing.open title="mixing (open)"

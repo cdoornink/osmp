@@ -1,0 +1,12 @@
+th {{needsIcon file}}
+th {{file.name}}
+th {{file.user.name}}
+th {{fromNow file.date}}
+th
+  if isMine
+    if file.isMine
+      span.icon-remove{action deleteAudio file} title="delete track"
+    else
+      downloadAudio file
+  else
+    downloadAudio file

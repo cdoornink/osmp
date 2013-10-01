@@ -1,0 +1,7 @@
+.row-fluid.browse-header
+  h2 All Projects
+
+view App.ProjectListView
+  each project in controller
+    unless project.isSetupMode
+      App.ProjectListItemView contentBinding='project'

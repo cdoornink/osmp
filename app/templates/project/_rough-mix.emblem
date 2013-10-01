@@ -1,0 +1,43 @@
+.rough-mix
+  h3
+    span.rough-mix-play-button.icon-play-2{action playRoughMix}
+    span.rough-mix-pause-button.icon-pause-2{action pauseRoughMix}
+    ' Rough Mix 
+    small All accepted parts without any mixing applied yet
+  #rough-mix-progress.rough-mix-progress.progress progress-striped
+    .bar style="height: 5px; width: 0%;"
+  if isMine
+    unless isSetupMode     
+      if readyToMix
+        .mixing-needed-bar
+          if doesNeedMixing
+            .mixing-status Tracks are locked for mixing
+          else
+            .mixing-status Be sure to upload the final version of the file when you are finished mixing.
+            App.MixUploadView contentBinding="mix"
+              .fileupload.fileupload-new.pull-left data-provides="fileupload"
+                .btn.btn-file.btn-success
+                  span.fileupload-new Submit Mix
+                  input#mix-fileupload type="file" name="files[]" data-url="server/php/" multiple="multiple"
+                span.fileupload-preview
+            #mix-progress.progress.progress-striped.active
+              .bar style="width: 0%;"
+      else
+        unless mixFinal
+          .mixing-needed-bar
+            button.btn.btn-small.btn-warning{action setReadyToMix} All Tracks Finished
+            span.pull-right style="margin-right:10px" Ready for mixing?
+  else
+    unless mixFinal
+      if readyToMix
+        .mixing-needed-bar Tracks are locked for mixing
+  each file in files
+    if file.isAccepted
+      App.AcceptedAudioFileView
+        acceptedAudio file.url
+  table.table.table-condensed
+    each file in files
+      if file.isAccepted
+        tr: App.TrackView contentBinding="file"
+      if file.tempInMix
+        tr.temp-in-mix: App.TrackView contentBinding="file"

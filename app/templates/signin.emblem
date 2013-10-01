@@ -1,0 +1,19 @@
+.login-page
+  form.form-horizontal.offset2.span6
+    h2 Sign In
+    .control-group
+      label.control-label for="inputEmail" Email
+      .controls: Ember.TextField valueBinding="username"
+    .control-group
+      label.control-label for="inputPassword" Password
+      .controls: Ember.TextField valueBinding="password" type="password"
+    .control-group
+      if App.me.isError
+        span.login-error Error: Invalid username or password
+        br
+      .controls
+        button.btn.btn-primary{action "tryLogin"} type="submit" Sign in
+    
+    .control-group
+      .controls
+        .already Not a member? {{link-to 'signup' | Sign Up }}

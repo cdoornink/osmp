@@ -1,0 +1,10 @@
+.jumbotron
+  .massive-icon.icon-vocals
+  h1 Recordinate
+  .lead The Open Source Music Project
+  link-to 'signup'
+    .btn.btn-large.btn-success Sign Up
+  .coax (its totally free!)
+  .already already a member?
+  link-to 'signin'
+    .btn.btn-primary Sign In

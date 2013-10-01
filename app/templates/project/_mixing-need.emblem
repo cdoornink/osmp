@@ -1,0 +1,60 @@
+if doesNeedMixing
+  if readyToMix
+    
+    .need-options
+      h4
+        .role-icon.icon-mixing title="mixing"
+        | Mixing
+      p {{need.details}}
+      if mix.isMine
+        if mix.isAccepted
+          .need-status Congratulations! Your mix was accepted!
+        else
+          if mix.isOpen
+            if mix.isSubmitted
+              .need-status You have submitted your mix and are waiting for the owner to accept or reject it
+            else
+              if mix.isRejected
+                .need-status Sorry, your mix was not accepted
+              else
+                .need-status You are mixing this project  
+                App.MixUploadView contentBinding="mix"
+                  .fileupload.fileupload-new.pull-left data-provides="fileupload"
+                    span.btn.btn-file.btn-success
+                      span.fileupload-new Submit Mix
+                      input#mix-fileupload type="file" name="files[]" data-url="server/php/" multiple="multiple"
+                    span.fileupload-preview
+                #mix-progress.progress.progress-striped.active
+                  .bar style="width: 0%;"
+          else
+            .need-status This part is {{mix.status}}
+      else
+        .need-status This part is {{mix.status}}
+        if mix.isOpen
+          if isMine
+            button.btn.btn-primary{action closeMix} Close
+          else
+            button.btn.btn-primary{action auditionMix} Audition
+        else
+           if isMine
+             button.btn.btn-primary{action reopenMix} Reopen
+    
+    .auditions
+      each audition in mix.auditions
+        if audition.id
+          App.AuditionListView contentBinding="audition"
+            auditionText audition
+            if audition.file
+              if isMine
+                button.btn.btn-success.btn-small{action acceptMix audition} Accept
+                button.btn.btn-danger.btn-small{action rejectMix audition} Reject
+              .audition-file.pull-right
+                span.solo-play-button.icon-play-2{action playSolo audition.file} title="play solo track"
+                playAuditionSolo audition files
+                if audition.isMine
+                  if audition.isAccepted
+                    downloadAuditionAudio audition files
+                  else
+                    span.icon-remove{action deleteAuditionAudio mix audition} title="delete track"
+                else
+                  downloadAuditionAudio audition files

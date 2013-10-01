@@ -1,0 +1,20 @@
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container 
+      a.brand href="#" Recordinate
+      ul.nav
+        li: link-to 'projects' | Browse
+        if App.me.content.firstName
+          li: link-to "my-projects" | My Projects 
+      ul.nav.pull-right
+        if App.me.content.firstName
+          li.dropdown
+            a.dropdown-toggle href="#" data-toggle="dropdown"
+              | {{App.me.content.firstName}} {{App.me.content.lastName}}
+              b.caret style="color:white"
+            ul.dropdown-menu
+              li: link-to 'create' | Create Project
+              li: link-to 'signout' | Sign out
+        else
+          li: link-to 'signin' | Sign In
+.main.container {{outlet}}

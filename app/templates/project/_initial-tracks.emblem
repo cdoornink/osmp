@@ -1,0 +1,26 @@
+if isMine
+  unless tracksLocked
+    h3 Upload Tracks
+    .initial-tracks
+      if isSetupMode
+        h4 Almost done setting up. Upload your tracks and click Complete.
+        .tips
+          h4 Tips
+          ol
+            li Upload each track as a separate file
+            li Tracks must be in mp3 format
+            li Each track NEEDS to start at the very beginning of the project (bar 1, beat 1)
+            li Keep your tracks free of any effects (fades, compression, etc)
+      else
+        h5 As the creator of this project, you can still add tracks to the project, but be very careful what you change since this project is now open to other users to collaborate on.
+      App.OwnerUploadView contentBinding="this"
+        .controls: Ember.Select contentBinding="App.parts" valueBinding="uploadRole"
+        .fileupload.fileupload-new.pull-left data-provides="fileupload"
+          span.btn.btn-file.btn-primary
+            span.fileupload-new Upload Track
+            input#owner-fileupload type="file" name="files[]" data-url="server/php/" multiple="multiple"
+          span.fileupload-preview
+        if isSetupMode
+          button.btn.btn-success.pull-right{action completeSetup} Complete Setup
+    #owner-progress.progress.progress-striped.active
+      .bar style="width: 0%;"
