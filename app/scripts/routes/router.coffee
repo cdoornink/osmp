@@ -17,8 +17,13 @@ App.ApplicationRoute = Ember.Route.extend
     App.me.tryLogin(true)
 
 App.IndexRoute = Ember.Route.extend
-  model: ->
-    return ['red', 'yellow', 'blue']
+  redirect: -> @transitionTo 'projects' if App.me.get "id"
+
+App.SignupRoute = Ember.Route.extend
+  redirect: -> @transitionTo 'projects' if App.me.get "id"
+
+App.SignoutRoute = Ember.Route.extend
+  redirect: -> @transitionTo 'projects' if App.me.get "id"
 
 App.SignoutRoute = Ember.Route.extend
   redirect: ->

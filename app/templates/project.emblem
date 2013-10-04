@@ -5,6 +5,8 @@ with content
       ' {{name}} 
       small {{genre}}
     h6.description {{description}}
+    if bpm
+      h6.bpm {{bpm}} bpm
     h6 Created by {{creator.name}} {{fromNow createdDate}}
     h6 Last updated {{fromNow lastUpdated}}
     h6 Status: {{status}}

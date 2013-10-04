@@ -1,4 +1,4 @@
-App.testing = true
+App.testing = false
 App.api = (req, type, data, callback) ->
   # url = "http://localhost:5000/osmp/"
   url = "http://nameless-beyond-8616.herokuapp.com/osmp/"

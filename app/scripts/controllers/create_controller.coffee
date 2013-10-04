@@ -3,6 +3,7 @@ App.CreateController = Ember.ObjectController.extend
   name: null
   artist: null
   description: null
+  bpm: null
   src: null
   genre: null
   agreeToTerms: false
@@ -54,6 +55,7 @@ App.CreateController = Ember.ObjectController.extend
       osmpid: id
       name: @name
       description: @description
+      bpm: @bpm
       genre: @genre 
       creator: {"id": App.me.get('id'), "name": App.me.name}
       needs: @project_needs

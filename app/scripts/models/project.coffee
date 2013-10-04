@@ -31,6 +31,7 @@ App.Project = Ember.Object.extend
     @set 'id', p.osmpid
     @set 'name', p.name
     @set 'description', p.description
+    @set 'bpm', p.bpm
     @set 'genre', p.genre
     @set 'creator', p.creator
     @set 'files', files
@@ -93,6 +94,7 @@ App.Project.reopenClass
       user: data.user
       name: data.name
       description: data.description
+      bpm: data.bpm
       genre: data.genre
       creator: data.creator 
       files: files

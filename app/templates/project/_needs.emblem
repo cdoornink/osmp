@@ -13,8 +13,13 @@ each need in needs
             if need.isRejected
               .need-status Sorry, your track was not accepted for this part.
             else
-              .need-status You are auditioning for this part
-  
+              h5 You are auditioning for this part
+              .tips
+                h4 Tips
+                ol
+                  li Tracks must be in mp3 format. 
+                  li Your track NEEDS to start at the very beginning of the project (bar 1, beat 1), even if your part doesn't come in at the beginning. Otherwise the track cannot be synced with the project's tracks for previewing.
+                  li Keep your tracks free of any effects (fades, compression, etc). This could ruin the final mixing process later.
               App.AuditionerUploadView contentBinding="need"
                 .fileupload.fileupload-new.pull-left data-provides="fileupload"
                   span.btn.btn-file.btn-success

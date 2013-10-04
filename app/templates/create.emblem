@@ -4,10 +4,13 @@
     legend Basic Information
     .control-group
       label.control-label Project Name
-      .controls: Ember.TextField valueBinding="name"
+      .controls: Ember.TextField valueBinding="name" placeholder="Song Title"
     .control-group
       label.control-label Description
-      .controls: Ember.TextArea valueBinding="description"
+      .controls: Ember.TextArea valueBinding="description" placeholder="Short summary of the song and what you are looking for"
+    .control-group
+      label.control-label BPM
+      .controls: Ember.TextField valueBinding="bpm" placeholder="If you are using a click track"
     .control-group
       label.control-label Genre
       .controls: Ember.Select contentBinding="App.genres" valueBinding="genre"
@@ -77,11 +80,11 @@
     .control-group
       .controls
         label.checkbox
-          Ember.Checkbox checkedBinding="needsMixing" 
+          Ember.Checkbox checkedBinding=needsMixing
           | I'd like other members to mix the project for me
     .control-group
       .controls
         label.checkbox
-          Ember.Checkbox checkedBinding="agreeToTerms"
+          Ember.Checkbox checkedBinding=agreeToTerms
           | I agree to the {{link-to 'terms' | terms of use}}
-        button.btn.btn-primary{action "submitProject"} type="submit" disabled="hasNotAgreed" Create Project
+        button.btn.btn-primary{action "submitProject"} type="submit" disabled=hasNotAgreed Create Project
